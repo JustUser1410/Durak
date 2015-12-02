@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameService
+namespace TheFool
 {
     public enum CardValues 
     { 
@@ -18,4 +18,12 @@ namespace GameService
         KING  = 13,
         ACE   = 14
     };
+
+    public enum CardSuit
+    {
+        HEARTS,
+        DIAMONDS,
+        CLUBS,
+        SPADES
+    }
 }

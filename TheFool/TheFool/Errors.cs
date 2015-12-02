@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameService
+namespace TheFool
 {
     public enum Errors
     {
+        NONE     //Means there is no error
     }
 }
