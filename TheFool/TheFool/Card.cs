@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheFool
 {
-    class Card
+    public class Card
     {
         CardValues value;
         CardSuit suit;

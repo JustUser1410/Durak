@@ -8,6 +8,7 @@ namespace TheFool
 {
     public enum CardValues 
     { 
+        NULL  = 0,
         SIX   = 6,
         SEVEN = 7,
         EIGHT = 8,
@@ -21,6 +22,7 @@ namespace TheFool
 
     public enum CardSuit
     {
+        NULL,
         HEARTS,
         DIAMONDS,
         CLUBS,
