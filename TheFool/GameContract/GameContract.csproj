@@ -40,15 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Card.cs" />
+    <Compile Include="CardValues.cs" />
+    <Compile Include="Errors.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="IGameCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TheFool\TheFool.csproj">
-      <Project>{bf3f3da8-b97b-4585-b7d4-82e6b161c6bc}</Project>
-      <Name>TheFool</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

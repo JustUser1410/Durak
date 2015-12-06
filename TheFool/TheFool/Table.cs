@@ -9,10 +9,10 @@ namespace TheFool
     class Table
     {
         private List<Card> CardsOnTable;
-        Player myPlayer;
         private int opponentID;
 
         public Int32 TableID { get; private set; }
+        public Player myPlayer { get; private set; }
 
         /// <summary>
         /// Creates table with specified table ID and players name

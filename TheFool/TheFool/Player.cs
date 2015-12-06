@@ -10,8 +10,8 @@ namespace TheFool
     {
         private List<Card> cards;
 
-        private int ID { get; private set; }
-        String Name { get; private set; }
+        public int ID { get; private set; }
+        public String Name { get; private set; }
 
         /// <summary>
         /// Creates player with specified id and name
