@@ -51,5 +51,10 @@ namespace TheFool
                 foreach (Card card in c)
                     cards.Add(card);
         }
+
+        public void ChangeName(string name)
+        {
+            this.Name = name;
+        }
     }
 }

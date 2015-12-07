@@ -15,14 +15,28 @@ namespace TheFool
         public Player myPlayer { get; private set; }
 
         /// <summary>
-        /// Creates table with specified table ID and players name
+        /// Creates table with specified table ID
         /// </summary>
         /// <param name="id">Table id. Used as token when hosting/joining the game</param>
-        /// <param name="name">Name of the player that's using this client</param>
-        public Table(int id, string name)
+        public Table(int id)
         {
             opponentID = -1;
+            this.TableID = id;
             this.CardsOnTable = new List<Card>();
+            this.myPlayer = new Player(
+                (new Random()).Next(10,1000), "Player");
+        }
+
+        /// <summary>
+        /// Creates new table with random ID
+        /// </summary>
+        public Table()
+        {
+            opponentID = -1;
+            this.TableID = (new Random()).Next(10, 10000);
+            this.CardsOnTable = new List<Card>();
+            this.myPlayer = new Player(
+                (new Random()).Next(10, 1000), "Player");
         }
 
         /// <summary>

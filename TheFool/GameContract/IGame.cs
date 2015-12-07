@@ -13,10 +13,10 @@ namespace GameContract
     {
         //Following two could be merged into PlayCard(Card c)
         [OperationContract]
-        void Attack(Card c);
+        bool Attack(Card c);
 
         [OperationContract]
-        void Defend(Card c);
+        bool Defend(Card c);
 
         /// <summary>
         /// Tells service that user wants to surrender
