@@ -31,6 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button3 = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbPlayerName = new System.Windows.Forms.TextBox();
+            this.btnStats = new System.Windows.Forms.Button();
+            this.cbParty = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnHost = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
             this.panelGame = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,14 +57,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tbPlayerName = new System.Windows.Forms.TextBox();
-            this.btnStats = new System.Windows.Forms.Button();
-            this.cbParty = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnHost = new System.Windows.Forms.Button();
-            this.btnPlay = new System.Windows.Forms.Button();
             this.panelMain.SuspendLayout();
             this.panelGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
@@ -99,6 +99,84 @@
             this.panelMain.Size = new System.Drawing.Size(685, 425);
             this.panelMain.TabIndex = 10;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(116, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(108, 24);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Your name:";
+            // 
+            // tbPlayerName
+            // 
+            this.tbPlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbPlayerName.Location = new System.Drawing.Point(120, 62);
+            this.tbPlayerName.Name = "tbPlayerName";
+            this.tbPlayerName.Size = new System.Drawing.Size(168, 26);
+            this.tbPlayerName.TabIndex = 15;
+            this.tbPlayerName.Text = "Player 1";
+            // 
+            // btnStats
+            // 
+            this.btnStats.Location = new System.Drawing.Point(120, 214);
+            this.btnStats.Name = "btnStats";
+            this.btnStats.Size = new System.Drawing.Size(168, 53);
+            this.btnStats.TabIndex = 14;
+            this.btnStats.Text = "Statistics";
+            this.btnStats.UseVisualStyleBackColor = true;
+            // 
+            // cbParty
+            // 
+            this.cbParty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbParty.ForeColor = System.Drawing.Color.White;
+            this.cbParty.Location = new System.Drawing.Point(400, 64);
+            this.cbParty.Name = "cbParty";
+            this.cbParty.Size = new System.Drawing.Size(64, 24);
+            this.cbParty.TabIndex = 13;
+            this.cbParty.Text = "Party";
+            this.cbParty.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(264, 336);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(168, 53);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Exit Game";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(400, 214);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(168, 53);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Join Game";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnHost
+            // 
+            this.btnHost.Location = new System.Drawing.Point(400, 113);
+            this.btnHost.Name = "btnHost";
+            this.btnHost.Size = new System.Drawing.Size(168, 53);
+            this.btnHost.TabIndex = 10;
+            this.btnHost.Text = "Host Game";
+            this.btnHost.UseVisualStyleBackColor = true;
+            // 
+            // btnPlay
+            // 
+            this.btnPlay.Location = new System.Drawing.Point(120, 113);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(168, 53);
+            this.btnPlay.TabIndex = 9;
+            this.btnPlay.Text = "Play Game";
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click_1);
+            // 
             // panelGame
             // 
             this.panelGame.Controls.Add(this.label3);
@@ -126,22 +204,22 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Narkisim", 14F);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(299, 373);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 19);
+            this.label3.Size = new System.Drawing.Size(77, 24);
             this.label3.TabIndex = 18;
             this.label3.Text = "Player 1";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Narkisim", 14F);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(299, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 19);
+            this.label2.Size = new System.Drawing.Size(77, 24);
             this.label2.TabIndex = 17;
             this.label2.Text = "Player 2";
             // 
@@ -278,7 +356,7 @@
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.Brown;
-            this.button4.Font = new System.Drawing.Font("Narkisim", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Location = new System.Drawing.Point(545, 360);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(132, 44);
@@ -297,84 +375,6 @@
             this.pictureBox14.TabIndex = 16;
             this.pictureBox14.TabStop = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(116, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(108, 24);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Your name:";
-            // 
-            // tbPlayerName
-            // 
-            this.tbPlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPlayerName.Location = new System.Drawing.Point(120, 62);
-            this.tbPlayerName.Name = "tbPlayerName";
-            this.tbPlayerName.Size = new System.Drawing.Size(168, 26);
-            this.tbPlayerName.TabIndex = 15;
-            this.tbPlayerName.Text = "Player 1";
-            // 
-            // btnStats
-            // 
-            this.btnStats.Location = new System.Drawing.Point(120, 214);
-            this.btnStats.Name = "btnStats";
-            this.btnStats.Size = new System.Drawing.Size(168, 53);
-            this.btnStats.TabIndex = 14;
-            this.btnStats.Text = "Statistics";
-            this.btnStats.UseVisualStyleBackColor = true;
-            // 
-            // cbParty
-            // 
-            this.cbParty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbParty.ForeColor = System.Drawing.Color.White;
-            this.cbParty.Location = new System.Drawing.Point(400, 64);
-            this.cbParty.Name = "cbParty";
-            this.cbParty.Size = new System.Drawing.Size(64, 24);
-            this.cbParty.TabIndex = 13;
-            this.cbParty.Text = "Party";
-            this.cbParty.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(264, 336);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(168, 53);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Exit Game";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(400, 214);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(168, 53);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Join Game";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btnHost
-            // 
-            this.btnHost.Location = new System.Drawing.Point(400, 113);
-            this.btnHost.Name = "btnHost";
-            this.btnHost.Size = new System.Drawing.Size(168, 53);
-            this.btnHost.TabIndex = 10;
-            this.btnHost.Text = "Host Game";
-            this.btnHost.UseVisualStyleBackColor = true;
-            // 
-            // btnPlay
-            // 
-            this.btnPlay.Location = new System.Drawing.Point(120, 113);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(168, 53);
-            this.btnPlay.TabIndex = 9;
-            this.btnPlay.Text = "Play Game";
-            this.btnPlay.UseVisualStyleBackColor = true;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click_1);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -384,7 +384,7 @@
             this.Controls.Add(this.panelGame);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.button3);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.ShowIcon = false;
