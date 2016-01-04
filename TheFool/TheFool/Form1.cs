@@ -7,10 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.ServiceModel;
+using GameContract;
+using GameService;
 
 namespace TheFool
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, GameService.IChatCallback
     {
         public List<PictureBox> pictureBoxList;
         public Form1()
