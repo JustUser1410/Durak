@@ -17,7 +17,7 @@ namespace TheFool
         {
             // instantiate a proxy to contact the service
             WSHttpBinding binding = new WSHttpBinding();
-            Uri address = new Uri("http://localhost:8000/calculatorservice");
+            Uri address = new Uri("http://localhost:8000/gameservice");
             EndpointAddress endpointAddress = new EndpointAddress(address);
             proxy = new GameClient(binding, endpointAddress);
         }
