@@ -43,7 +43,6 @@
     <Compile Include="Card.cs" />
     <Compile Include="CardValues.cs" />
     <Compile Include="Errors.cs" />
-    <Compile Include="IChat.cs" />
     <Compile Include="IGame.cs" />
     <Compile Include="IGameCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
