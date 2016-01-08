@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheFool;
+using TheFool;      // Not sure why Card class and enumerations are used from here, but that's the only way it works
 using System.ServiceModel;
 using GameContract;
-//There is no need to copy Card class and enumerations since I added reference
 
 namespace GameService
 {

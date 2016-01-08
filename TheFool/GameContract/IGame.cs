@@ -12,22 +12,22 @@ namespace GameContract
     public interface IGame
     {
         //Following two could be merged into PlayCard(Card c)
-        [OperationContract]
+        [OperationContract(IsOneWay = false)]
         bool Attack(Card c);
 
-        [OperationContract]
+        [OperationContract(IsOneWay = false)]
         bool Defend(Card c);
 
         /// <summary>
         /// Tells service that user wants to surrender
         /// </summary>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void Surrender();
 
         /// <summary>
         /// Sends request to play against random player
         /// </summary>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void PlayRandom(int playerID);
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace GameContract
         /// </summary>
         /// <param name="token">desired token that is necessary for somebody to join</param>
         /// <param name="playerID">player that wants to Host</param>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void HostGame(int token, int playerID);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace GameContract
         /// <param name="token">token that game room was hosted with</param>
         /// <param name="playerID">player that wants to Join</param>
         /// <returns>Returns type of error (NONE if there is no error)</returns>
-        [OperationContract]
+        [OperationContract(IsOneWay = false)]
         Errors JoinGame(int token, int playerID);
     }
 }

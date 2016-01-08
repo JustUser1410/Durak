@@ -15,7 +15,7 @@ namespace GameContract
         /// Sets which player has turn
         /// </summary>
         /// <param name="playerID"> id of a player that has the turn</param>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void PlayerTurn(int playerID);
 
         /// <summary>
@@ -23,60 +23,43 @@ namespace GameContract
         /// It is called after player fails to defend or decides to take the cards
         /// </summary>
         /// <param name="c">list of cards that are currently played</param>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void CardsOnTable(List<Card> c);
-
-        /// <summary>
-        /// WE HAVE TO TALK ABOUT THIS ONE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        /// we could just give a return value for Attack/Defend method
-        /// in IGame. This way service would have to return something 
-        /// every time.
-        /// </summary>
-        /// <param name="e"></param>
-        [OperationContract]
-        void InvalidMove(Errors e);
 
         /// <summary>
         /// Sends cards to players at the end of each turn
         /// if there are some left in the deck
         /// </summary>
         /// <param name="c">list of cards</param>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void DrawCards(List<Card> c);
 
         /// <summary>
         /// Sends new received message 
         /// </summary>
         /// <param name="message"></param>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void ReceivedMessage(String message);
 
         /// <summary>
         /// Informs user that server cannont let user host
         /// </summary>
         /// <param name="e">Type of error</param>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void CannotHost(Errors e);//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<NOT SURE IF NECESSARY ANYMORE
-
-        /// <summary>
-        /// Informs user that server cannont let user join
-        /// </summary>
-        /// <param name="e">Type of error</param>
-        [OperationContract]
-        void CannotJoin(Errors e);//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<NOT SURE IF NECESSARY ANYMORE
 
         /// <summary>
         /// Before game starts, notifies user that opponent is ready
         /// </summary>
         /// <param name="playerID"> id of the opponent</param>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void PlayerReady(int playerID);
 
         /// <summary>
         /// After game is over, sends which position user has taken
         /// </summary>
         /// <param name="yourPosition"> 1 = won, 0 = lost</param>
-        [OperationContract]
+        [OperationContract(IsOneWay = true)]
         void GameOver(int yourPosition);
 
 
