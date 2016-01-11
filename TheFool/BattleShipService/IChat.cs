@@ -14,11 +14,17 @@ namespace ChatService
         void StartChatSession(string player);
 
         [OperationContract(IsOneWay = true)]
+        void addPlyer(Player player);
+
+        [OperationContract(IsOneWay = true)]
         void PostChatMessage(string message, string postername, string opponent);
+
+        [OperationContract(IsOneWay = true)]
+        void createNewUser(string name, string psw);
 
     }
 
-    [ServiceContract(Namespace = "BattleShipService")]
+    [ServiceContract(Namespace = "DurakService")]
     public interface IChatCallback
     {
         [OperationContract]

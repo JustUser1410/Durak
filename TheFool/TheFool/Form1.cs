@@ -9,24 +9,39 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.ServiceModel;
 using GameContract;
-using GameService;
+using ChatService;
 
 namespace TheFool
 {
-    public partial class Form1 : Form, GameService.IChatCallback
+    public partial class Form1 : Form, ServiceReference1.IChatCallback
     {
         public List<PictureBox> pictureBoxList;
+        Player Leo;
+        string Playername;
+        string Opponent;
+        ServiceReference1.ChatClient proxy;
         public Form1()
         {
             InitializeComponent();
+            
             this.panelGame.Visible = false;
             this.panelMain.Visible = true;
             this.pictureBoxList = new List<PictureBox>();
+
+            Leo = new Player(01,"Leo");
+            proxy = new ServiceReference1.ChatClient(new InstanceContext(this));
+            
+            
+        }
+
+        public void UpdateChatMessages(string message, string playername)
+        {
+            this.listBox1.ScrollAlwaysVisible = true;
+            this.listBox1.Items.Add(playername + ": " + message);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -136,6 +151,40 @@ namespace TheFool
         {
             this.pictureBoxList.Add(pictureBox2);
             RefreshTable();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (this.textBox1.Text != "")
+            {
+                string msg = this.textBox1.Text;
+                this.textBox1.Text = string.Empty;
+                proxy.PostChatMessage(msg, Playername, Opponent);
+                this.listBox1.Items.Add(Playername + "" + " : " + msg);
+            }
+            else
+            {
+                MessageBox.Show("You have to type the message first.");
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            proxy.createNewUser(textBox2.Text,textBox3.Text);
+            proxy.StartChatSession(textBox2.Text);
+            if (textBox2.Text == "Leo")
+            {
+                this.Playername = textBox2.Text;
+                this.Opponent = "Leo2";
+            }
+            else if (textBox2.Text == "Leo2")
+            {
+                this.Playername = textBox2.Text;
+                this.Opponent = "Leo";
+            }
+            
+            this.button5.Enabled = true;
+            this.textBox1.Enabled = true;
         }
     }
 }

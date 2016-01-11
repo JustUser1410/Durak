@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="DurakService" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="DurakService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="DurakService/Imports">
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/GameService/GameService/?xsd=xsd0" namespace="DurakService" />
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/GameService/GameService/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/GameService/GameService/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ChatService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IChat_StartChatSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartChatSession" />
+  </wsdl:message>
+  <wsdl:message name="IChat_addPlyer_InputMessage">
+    <wsdl:part name="parameters" element="tns:addPlyer" />
+  </wsdl:message>
+  <wsdl:message name="IChat_PostChatMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostChatMessage" />
+  </wsdl:message>
+  <wsdl:message name="IChat_createNewUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:createNewUser" />
+  </wsdl:message>
+  <wsdl:message name="IChat_UpdateChatMessages_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateChatMessages" />
+  </wsdl:message>
+  <wsdl:message name="IChat_UpdateChatMessages_InputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:UpdateChatMessagesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IChat">
+    <wsdl:operation name="StartChatSession">
+      <wsdl:input wsaw:Action="DurakService/IChat/StartChatSession" message="tns:IChat_StartChatSession_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addPlyer">
+      <wsdl:input wsaw:Action="DurakService/IChat/addPlyer" message="tns:IChat_addPlyer_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PostChatMessage">
+      <wsdl:input wsaw:Action="DurakService/IChat/PostChatMessage" message="tns:IChat_PostChatMessage_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="createNewUser">
+      <wsdl:input wsaw:Action="DurakService/IChat/createNewUser" message="tns:IChat_createNewUser_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateChatMessages">
+      <wsdl:output wsaw:Action="DurakService/IChat/UpdateChatMessages" message="tns:IChat_UpdateChatMessages_OutputCallbackMessage" />
+      <wsdl:input wsaw:Action="DurakService/IChat/UpdateChatMessagesResponse" message="tns:IChat_UpdateChatMessages_InputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="cd164faf-3ee0-4802-90a9-9d5ebcae67d7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/BattleShipService/GameService/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="d40396f9-5935-4694-bedb-c7338fe3e10b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BattleShipService/GameService/?xsd=xsd1" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="1f2771e8-139c-4624-9080-19f45b9eaa8b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BattleShipService/GameService/?xsd=xsd0" />
+    <MetadataFile FileName="item.wsdl" MetadataType="Wsdl" ID="4674f188-7c29-40ad-b773-99284e0ab029" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BattleShipService/GameService/?wsdl=wsdl0" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="902775da-4dc4-418c-875c-40f74dec6fe1" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BattleShipService/GameService/?disco" />
+    <MetadataFile FileName="GameService.wsdl" MetadataType="Wsdl" ID="cd7a59ae-8f68-4dc7-a041-e5d9283d8c8d" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BattleShipService/GameService/?wsdl" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="d8281770-90b8-4a51-89f4-445434546af3" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/BattleShipService/GameService/?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -5,9 +5,10 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace ChatService
+namespace BattleShipService
 {
-    [ServiceContract(Namespace = "DurakService", CallbackContract = typeof(IChatCallback))]
+
+    [ServiceContract(Namespace = "BattleShipService", CallbackContract = typeof(IChatCallback))]
     public interface IChat
     {
         [OperationContract(IsOneWay = true)]

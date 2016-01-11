@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GameContract;
 //There is no need to copy Card class and enumerations since I added reference
 
-namespace GameService
+namespace ChatService
 {
     class Dealer
     {
