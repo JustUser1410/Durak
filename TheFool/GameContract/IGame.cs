@@ -15,6 +15,12 @@ namespace GameContract
         [OperationContract(IsOneWay = false)]
         bool Attack(Card c);
 
+        /// <summary>
+        /// Notifies that 
+        /// </summary>
+        [OperationContract(IsOneWay = true)]
+        void EndAttack();
+
         [OperationContract(IsOneWay = false)]
         bool Defend(Card c);
 
@@ -48,5 +54,19 @@ namespace GameContract
         /// <returns>Returns type of error (NONE if there is no error)</returns>
         [OperationContract(IsOneWay = false)]
         Errors JoinGame(int token, int playerID);
+
+        /// <summary>
+        /// Whenever user is not able to defend, he must take cards off the table
+        /// and put them in his hand
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract(IsOneWay = false)]
+        List<Card> TakeCards();
+
+        /// <summary>
+        /// Notifies dealer that player is out of cards for this move
+        /// </summary>
+        [OperationContract(IsOneWay = true)]
+        void OutOfCards(); 
     }
 }

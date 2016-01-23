@@ -17,6 +17,7 @@ namespace GameService
         private List<IGameCallback> callbacks;
         private int player1;
         private int player2;
+        private int pTurn;                  // Player that has the current turn
 
         // It takes player IDs at the beginning
         public Dealer(int player1, int player2) 
@@ -122,8 +123,83 @@ namespace GameService
 
         private void GameEnds()
         { 
+            // One of the players ran out of cards
+            // There are no more cards in the deck
 
+            // Opponent looses
         }
 
+        public bool PlayCard(Card c)
+        {
+            this.cardsOnTable.Add(c);
+            if (cardsOnTable.Count % 2 != 0)
+            {
+                // if both are trump cards and defenders' is higher
+                if (cardsOnTable[cardsOnTable.Count - 1].GetSuit() == this.TrumpSuit
+                    && cardsOnTable[cardsOnTable.Count - 2].GetSuit() == this.TrumpSuit
+                    && cardsOnTable[cardsOnTable.Count - 2].GetValue() < cardsOnTable[cardsOnTable.Count - 1].GetValue())
+                {
+                    // Notify opponent about successful defence
+                    NextTurn();
+                    return true;
+                }
+                //if defenders' is trump
+                else if (cardsOnTable[cardsOnTable.Count - 1].GetSuit() == this.TrumpSuit
+                    && cardsOnTable[cardsOnTable.Count - 2].GetSuit() != this.TrumpSuit)
+                {
+                    // Notify opponent about successful defence
+                    NextTurn();
+                    return true;
+                }
+                // if suit is the same and defenders' card is higher
+                else if (cardsOnTable[cardsOnTable.Count - 1].GetSuit() == cardsOnTable[cardsOnTable.Count - 2].GetSuit()
+                    && cardsOnTable[cardsOnTable.Count - 2].GetValue() < cardsOnTable[cardsOnTable.Count - 1].GetValue())
+                {
+                    // Notify opponent about successful defence
+                    NextTurn();
+                    return true;
+                }
+                else
+                    return false;  
+            }
+            else
+            {
+                // Check if attack is possible
+                    // Card value must mach one of those on the table
+                // Notify opponent to defend
+                NextTurn();
+                return true;    // To Do
+            }
+        }
+
+        public List<Card> GetCardsOnTable()
+        {
+            List<Card> output = cardsOnTable;
+            // Clean the table
+            cardsOnTable.Clear();
+            // Notify opponent that he has turn
+            NextTurn();
+            return output;
+        }
+
+        /// <summary>
+        /// Gives turn to the next player
+        /// </summary>
+        private void NextTurn()
+        {
+            // Take note of next player
+            // notify players about who has the next turn
+            // notify players about cards on the table
+        }
+
+        public void EndAttack()
+        {
+            // Clear the table
+            // Ask players if they need more cards
+                // (Need to add method that returns how many cards each player has)
+            // Deal the cards
+            // Notify players about next turn
+            NextTurn();
+        }
     }
 }
