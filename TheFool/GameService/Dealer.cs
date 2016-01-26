@@ -17,16 +17,16 @@ namespace GameService
         private List<IGameCallback> callbacks;
         private int player1;
         private int player2;
+        private int attacker;               // ID of a player that currently attacks
         private int pTurn;                  // Player that has the current turn
 
         // It takes player IDs at the beginning
-        public Dealer(int player1, int player2) 
+        public Dealer() 
         {
-            this.player1 = player1;
-            this.player2 = player2;
-            
-            // Set up contracts
-            // TO DO
+            this.player1 = 0;
+            this.player2 = 0;
+
+            callbacks = new List<IGameCallback>();
 
             this.Deck = new List<Card>();
             this.cardsOnTable = new List<Card>();
@@ -114,19 +114,45 @@ namespace GameService
             // Decide who takes the first turn
             // Anounce that player to everybody
             if (p1Smallest.GetValue() < p2Smallest.GetValue())
-                foreach(IGameCallback item in callbacks)
+            {
+                foreach (IGameCallback item in callbacks)
                     item.PlayerTurn(player1);
+                pTurn = player1;
+                attacker = player1;
+            }
             else
+            {
                 foreach (IGameCallback item in callbacks)
                     item.PlayerTurn(player2);
+                pTurn = player1;
+                attacker = player1;
+            }
         }
 
-        private void GameEnds()
+        /// <summary>
+        /// Checks if the game is supposed to end. 
+        /// It must be called every time one of the players runs out of cards in his hand.
+        /// </summary>
+        /// <param name="PlayerID">ID of a player that ran out of cards</param>
+        /// <returns></returns>
+        public bool GameEnds(int PlayerID)
         { 
             // One of the players ran out of cards
             // There are no more cards in the deck
-
-            // Opponent looses
+            if (Deck.Count == 0)
+            {
+                foreach (IGameCallback c in callbacks)
+                    if (player1 == PlayerID)
+                        c.GameOver(1);
+                    else
+                        c.GameOver(0);
+                return true;
+            }
+            else
+            {
+                EndAttack();
+                return false;
+            }
         }
 
         public bool PlayCard(Card c)
@@ -160,15 +186,33 @@ namespace GameService
                     return true;
                 }
                 else
-                    return false;  
+                {
+                    // remove the last card  from the table
+                    cardsOnTable.RemoveAt(cardsOnTable.Count - 1);
+                    return false;
+                }
             }
             else
             {
                 // Check if attack is possible
                     // Card value must mach one of those on the table
-                // Notify opponent to defend
-                NextTurn();
-                return true;    // To Do
+                if (cardsOnTable.Count == 1) // Its the first card
+                {
+                    // Notify opponent to defend
+                    NextTurn();
+                    return true;
+                }
+                else
+                {
+                    foreach (Card card in cardsOnTable)
+                        if (c.GetValue() == card.GetValue() && c.GetType() != card.GetType()) // one of the cards has the same value, but it's not the same card
+                        {
+                            NextTurn();
+                            return true;
+                        }
+                    cardsOnTable.RemoveAt(cardsOnTable.Count - 1);
+                    return false;
+                }
             }
         }
 
@@ -188,18 +232,70 @@ namespace GameService
         private void NextTurn()
         {
             // Take note of next player
+            if (pTurn == player1)
+                pTurn = player2;
+            else
+                pTurn = player1;
             // notify players about who has the next turn
-            // notify players about cards on the table
+            foreach (IGameCallback item in callbacks)
+            {
+                item.PlayerTurn(pTurn);
+                // notify players about cards on the table
+            }
         }
 
         public void EndAttack()
         {
+            int cardCount = cardsOnTable.Count;
+            List<Card> p1Draw = new List<Card>();
+            List<Card> p2Draw = new List<Card>();
             // Clear the table
+            cardsOnTable.Clear();
             // Ask players if they need more cards
-                // (Need to add method that returns how many cards each player has)
+                // (Need to add method that returns how many cards each player has) ------------------------------TO DO-------
+            // For now we return the same amount of cards that the players put on the table
+            for (int i = 0; i < cardCount && Deck.Count > 0; i++ )
+            {
+                // now it's drawing cards one by one
+                // actual rule is that attacker draws first, I'll do it later ------------------------------------TO DO-------
+                if (i % 2 == 0)
+                    p1Draw.Add(Deck[0]);
+                else
+                    p2Draw.Add(Deck[0]);
+                Deck.RemoveAt(0);
+            }
             // Deal the cards
+            this.callbacks[0].DrawCards(p1Draw);
+            this.callbacks[1].DrawCards(p2Draw);
             // Notify players about next turn
             NextTurn();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="playerID"></param>
+        /// <returns>True if 2nd player connected</returns>
+        public bool Connect(int playerID)
+        {
+            bool returnvalue = false;
+            IGameCallback callback = OperationContext.Current.GetCallbackChannel<IGameCallback>();
+            if (player1 == 0)
+            {
+                player1 = playerID;
+                callbacks.Insert(0, callback);
+            }
+            else if (player2 == 0)
+            {
+                if (player2 == player1)
+                    return false;
+                player2 = playerID;
+                callbacks.Insert(1, callback);
+                // If it's second player, deal cards and start the game
+                DealCards();
+            }
+            return returnvalue;
+        }
+
     }
 }

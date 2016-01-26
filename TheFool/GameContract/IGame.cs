@@ -13,22 +13,22 @@ namespace GameContract
     {
         //Following two could be merged into PlayCard(Card c)
         [OperationContract(IsOneWay = false)]
-        bool Attack(Card c);
+        bool Attack(int playerID, Card c);
 
         /// <summary>
         /// Notifies that 
         /// </summary>
         [OperationContract(IsOneWay = true)]
-        void EndAttack();
+        void EndAttack(int playerID);
 
         [OperationContract(IsOneWay = false)]
-        bool Defend(Card c);
+        bool Defend(int playerID, Card c);
 
         /// <summary>
         /// Tells service that user wants to surrender
         /// </summary>
         [OperationContract(IsOneWay = true)]
-        void Surrender();
+        void Surrender(int playerID);
 
         /// <summary>
         /// Sends request to play against random player
@@ -61,12 +61,12 @@ namespace GameContract
         /// </summary>
         /// <returns></returns>
         [OperationContract(IsOneWay = false)]
-        List<Card> TakeCards();
+        List<Card> TakeCards(int playerID);
 
         /// <summary>
         /// Notifies dealer that player is out of cards for this move
         /// </summary>
         [OperationContract(IsOneWay = true)]
-        void OutOfCards(); 
+        void OutOfCards(int playerID); 
     }
 }

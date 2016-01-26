@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using TheFool;
@@ -14,26 +15,39 @@ namespace GameService
 
         static void Main(string[] args)
         {
+            ServiceHost host = new ServiceHost(typeof(Program));
 
+            // define an endpoint for the service
+            Type contract = typeof(IGame);
+            WSHttpBinding binding = new WSHttpBinding();
+            Uri address = new Uri("http://localhost:8000/GameService");
+            host.AddServiceEndpoint(contract, binding, address);
+
+            // start hosting
+            host.Open();
+
+            // The service can now be accessed.
+            Console.WriteLine("The service is being hosted at address " + address);
+            Console.WriteLine("Press <ENTER> to stop hosting.\n");
+            Console.ReadLine();
+
+            // stop hosting
+            host.Close();
         }
 
-        private void Init()
-        {
-
-        }
         
-        public bool Attack(Card c)
+        public bool Attack(int playerID, Card c)
         {
             // Put the card on the table
             return aDealer.PlayCard(c);
         }
 
-        public void EndAttack()
+        public void EndAttack(int playerID)
         {
             aDealer.EndAttack();
         }
 
-        public bool Defend(Card c)
+        public bool Defend(int playerID, Card c)
         {
             if (aDealer.PlayCard(c))
                 return true;
@@ -41,14 +55,14 @@ namespace GameService
                 return false;
         }
 
-        List<Card> TakeCards()
+        public List<Card> TakeCards(int playerID)
         {
             // Get cards off the table and
             // return them to the player
             return aDealer.GetCardsOnTable();
         }
 
-        public void Surrender()
+        public void Surrender(int playerID)
         {
             // Notify opponenet that player surrendered
             // Get rid of the dealer
@@ -56,11 +70,13 @@ namespace GameService
 
         public void PlayRandom(int playerID)
         {
-            // If it's a first player
-                // Wait for another one
-            // If it's second
-                // Create a dealer
-                // Start the game
+            if (aDealer == null)
+            {
+                aDealer = new Dealer();
+                aDealer.Connect(playerID);
+            }
+            else
+                aDealer.Connect(playerID);
         }
 
         public void HostGame(int token, int playerID)
@@ -75,6 +91,20 @@ namespace GameService
             // create dealer
             // Start game
             return Errors.NONE;
+        }
+
+        public void OutOfCards(int playerID)
+        {
+            // Check if game ends
+            if (aDealer.GameEnds(playerID))
+            {
+                // Discard of the dealer
+                aDealer = null;
+            }
+            else
+            {
+                aDealer.EndAttack();
+            }
         }
     }
 }
