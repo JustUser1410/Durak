@@ -52,10 +52,13 @@
     <Compile Include="Dealer.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="IChat.cs" />
+    <Compile Include="IClient.cs" />
     <Compile Include="IGame.cs" />
+    <Compile Include="IServer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameService.cs" />
+    <Compile Include="Server.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -66,7 +69,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Z:\Fontys\Projects\C#\MDW_Game\Durak\TheFool\GameContract\GameContract.csproj">
+    <ProjectReference Include="..\GameContract\GameContract.csproj">
       <Project>{70fc3ff1-47ca-4591-a3fa-f86e8112bb70}</Project>
       <Name>GameContract</Name>
     </ProjectReference>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 
-namespace TheFool
+namespace GameContract
 {
     [DataContract]
     public class Card

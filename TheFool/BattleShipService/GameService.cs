@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using GameContract;
-using TheFool;
 
 namespace ChatService
 {
