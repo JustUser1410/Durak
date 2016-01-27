@@ -8,6 +8,7 @@ using GameContract;
 
 namespace ChatService
 {
+    [ServiceContract(Namespace = "GameServer", SessionMode = SessionMode.Required, CallbackContract = typeof(IClient))]
     public interface IServer
     {
         [OperationContract(IsOneWay = false)]

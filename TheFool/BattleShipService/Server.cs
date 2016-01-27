@@ -8,7 +8,7 @@ using GameContract;
 
 namespace ChatService
 {
-    [ServiceContract(Namespace = "GameServer", CallbackContract = typeof(IClient))]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Server : IServer
     {
         private List<IClient> playerCallbacks;
@@ -17,8 +17,7 @@ namespace ChatService
         private List<Card> cardsOnTable;
         private List<Card> cardsPlayer1;
         private List<Card> cardsPlayer2;
-
-        private int currentPlayerID;
+        
         private int nextPlayerID;
 
         public int joinGame()
