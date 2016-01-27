@@ -7,7 +7,7 @@ using TheFool;      // Not sure why Card class and enumerations are used from he
 using System.ServiceModel;
 using GameContract;
 
-namespace GameService
+namespace ChatService
 {
     class Dealer
     {

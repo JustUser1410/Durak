@@ -7,7 +7,7 @@
     <ProjectGuid>{A8AF71F1-A5C2-487E-80B9-04F346BE2A3F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GameService</RootNamespace>
+    <RootNamespace>ChatService</RootNamespace>
     <AssemblyName>GameService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
