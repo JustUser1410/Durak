@@ -65,7 +65,9 @@ namespace GameService
         public void Surrender(int playerID)
         {
             // Notify opponenet that player surrendered
+            aDealer.Surrender(playerID);
             // Get rid of the dealer
+            aDealer = null;
         }
 
         public void PlayRandom(int playerID)
@@ -88,7 +90,6 @@ namespace GameService
         public Errors JoinGame(int token, int playerID)
         {
             // Check if the token is valid
-            // create dealer
             // Start game
             return Errors.NONE;
         }

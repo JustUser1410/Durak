@@ -297,5 +297,14 @@ namespace GameService
             return returnvalue;
         }
 
+        public void Surrender(int playerID)
+        {
+            Deck.Clear();
+            if (player1 == playerID)
+                GameEnds(player2);
+            else
+                GameEnds(player1);
+        }
+
     }
 }
