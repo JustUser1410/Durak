@@ -78,7 +78,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Properties\DataSources\Card.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,7 +92,6 @@
     <None Include="Service References\ServiceReference1\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\item1.wsdl" />
     <None Include="Service References\ServiceReference1\item1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -105,10 +103,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BattleShipService\Service.csproj">
-      <Project>{6f0e96f8-66fd-4517-a56b-605669eb5532}</Project>
-      <Name>Service</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GameContract\GameContract.csproj">
       <Project>{70fc3ff1-47ca-4591-a3fa-f86e8112bb70}</Project>
       <Name>GameContract</Name>
@@ -130,15 +124,6 @@
     <None Include="Service References\ServiceReference1\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceReference1\item3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\item31.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\item32.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ServiceReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

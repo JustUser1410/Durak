@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using GameContract;
-using ChatService;
 
 namespace TheFool
 {

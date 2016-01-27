@@ -66,7 +66,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GameContract\GameContract.csproj">
+    <ProjectReference Include="Z:\Fontys\Projects\C#\MDW_Game\Durak\TheFool\GameContract\GameContract.csproj">
       <Project>{70fc3ff1-47ca-4591-a3fa-f86e8112bb70}</Project>
       <Name>GameContract</Name>
     </ProjectReference>
