@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
 using TheFool;
+using GameContract;
 
-namespace GameContract
+namespace ChatService
 {
     [ServiceContract(Namespace = "GameContract")]
     public interface IGame
@@ -67,6 +68,6 @@ namespace GameContract
         /// Notifies dealer that player is out of cards for this move
         /// </summary>
         [OperationContract(IsOneWay = true)]
-        void OutOfCards(int playerID); 
+        void OutOfCards(int playerID);
     }
 }

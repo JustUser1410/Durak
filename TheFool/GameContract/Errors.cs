@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheFool
+namespace GameContract
 {
     public enum Errors
     {

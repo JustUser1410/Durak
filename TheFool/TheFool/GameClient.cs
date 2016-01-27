@@ -23,19 +23,19 @@ namespace TheFool
             : base(binding,remoteAddress)
         { }
 
-        public bool Attack(Card c)
+        public bool Attack(int playerID, Card c)
         {
-            return base.Channel.Attack(c);
+            return base.Channel.Attack(playerID, c);
         }
 
-        public bool Defend(Card c)
+        public bool Defend(int playerID, Card c)
         {
-            return base.Channel.Defend(c);
+            return base.Channel.Defend(playerID, c);
         }
 
-        public void Surrender()
+        public void Surrender(int playerID)
         {
-            base.Channel.Surrender();
+            base.Channel.Surrender(playerID);
         }
 
         public void PlayRandom(int playerID)
@@ -53,5 +53,19 @@ namespace TheFool
             return base.Channel.JoinGame(token, playerID);
         }
 
+        public void EndAttack(int playerID)
+        {
+            base.Channel.EndAttack(playerID);
+        }
+
+        public List<Card> TakeCards(int playerID)
+        {
+            return base.Channel.TakeCards(playerID);
+        }
+
+        void OutOfCards(int playerID)
+        {
+            base.Channel.OutOfCards(playerID);
+        }
     }
 }

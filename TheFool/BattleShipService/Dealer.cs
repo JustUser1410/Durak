@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheFool;      // Not sure why Card class and enumerations are used from here, but that's the only way it works
+using TheFool;
 using System.ServiceModel;
 using GameContract;
 
@@ -21,7 +21,7 @@ namespace ChatService
         private int pTurn;                  // Player that has the current turn
 
         // It takes player IDs at the beginning
-        public Dealer() 
+        public Dealer()
         {
             this.player1 = 0;
             this.player2 = 0;
@@ -136,7 +136,7 @@ namespace ChatService
         /// <param name="PlayerID">ID of a player that ran out of cards</param>
         /// <returns></returns>
         public bool GameEnds(int PlayerID)
-        { 
+        {
             // One of the players ran out of cards
             // There are no more cards in the deck
             if (Deck.Count == 0)
@@ -197,7 +197,7 @@ namespace ChatService
             else
             {
                 // Check if attack is possible
-                    // Card value must mach one of those on the table
+                // Card value must mach one of those on the table
                 if (cardsOnTable.Count == 1) // Its the first card
                 {
                     // Notify opponent to defend
@@ -254,9 +254,9 @@ namespace ChatService
             // Clear the table
             cardsOnTable.Clear();
             // Ask players if they need more cards
-                // (Need to add method that returns how many cards each player has) ------------------------------TO DO-------
+            // (Need to add method that returns how many cards each player has) ------------------------------TO DO-------
             // For now we return the same amount of cards that the players put on the table
-            for (int i = 0; i < cardCount && Deck.Count > 0; i++ )
+            for (int i = 0; i < cardCount && Deck.Count > 0; i++)
             {
                 // now it's drawing cards one by one
                 // actual rule is that attacker draws first, I'll do it later ------------------------------------TO DO-------
