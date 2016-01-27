@@ -155,6 +155,8 @@ namespace GameService
             }
         }
 
+        // For now, Attack can last as long as both players still have some cards
+        // Ideally attack should not last more than 12 turns (there can't be more than 12 cards on the table)
         public bool PlayCard(Card c)
         {
             this.cardsOnTable.Add(c);

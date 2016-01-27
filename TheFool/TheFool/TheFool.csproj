@@ -57,6 +57,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxy.cs" />
     <Compile Include="Statistics.cs" />
     <Compile Include="Table.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -89,6 +90,9 @@
       <Project>{70fc3ff1-47ca-4591-a3fa-f86e8112bb70}</Project>
       <Name>GameContract</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

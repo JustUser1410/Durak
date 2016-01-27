@@ -27,7 +27,7 @@ namespace GameService
             host.Open();
 
             // The service can now be accessed.
-            Console.WriteLine("The service is being hosted at address " + address);
+            Console.WriteLine("The service is being hosted");
             Console.WriteLine("Press <ENTER> to stop hosting.\n");
             Console.ReadLine();
 
@@ -39,24 +39,33 @@ namespace GameService
         public bool Attack(int playerID, Card c)
         {
             // Put the card on the table
-            return aDealer.PlayCard(c);
+            bool output = aDealer.PlayCard(c);
+            if (output)
+                Console.WriteLine("Attack successful!");
+            else
+                Console.WriteLine("Card is not allowed!");
+            return output;
         }
 
         public void EndAttack(int playerID)
         {
+            Console.WriteLine("Player {0} ended attack.", playerID);
             aDealer.EndAttack();
         }
 
         public bool Defend(int playerID, Card c)
         {
-            if (aDealer.PlayCard(c))
-                return true;
+            bool output = aDealer.PlayCard(c);
+            if (output)
+                Console.WriteLine("Defence successful!");
             else
-                return false;
+                Console.WriteLine("Card is not allowed!");
+            return output;
         }
 
         public List<Card> TakeCards(int playerID)
         {
+            Console.WriteLine("Player {0} was unable to defend", playerID);
             // Get cards off the table and
             // return them to the player
             return aDealer.GetCardsOnTable();
@@ -68,6 +77,7 @@ namespace GameService
             aDealer.Surrender(playerID);
             // Get rid of the dealer
             aDealer = null;
+            Console.WriteLine("Player {0} surrenders. Game is over.", playerID);
         }
 
         public void PlayRandom(int playerID)
@@ -76,9 +86,13 @@ namespace GameService
             {
                 aDealer = new Dealer();
                 aDealer.Connect(playerID);
+                Console.WriteLine("First player joined! {0}", playerID);
             }
             else
+            {
                 aDealer.Connect(playerID);
+                Console.WriteLine("Second player joined! {0}", playerID);
+            }
         }
 
         public void HostGame(int token, int playerID)
@@ -101,10 +115,12 @@ namespace GameService
             {
                 // Discard of the dealer
                 aDealer = null;
+                Console.WriteLine("Player {0} won!", playerID);
             }
             else
             {
                 aDealer.EndAttack();
+                Console.WriteLine("Player {0} is out of cards.", playerID);
             }
         }
     }
