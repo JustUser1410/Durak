@@ -40,7 +40,7 @@
             this.btnHost = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.panelGame = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.playerName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -155,7 +155,7 @@
             // 
             // panelGame
             // 
-            this.panelGame.Controls.Add(this.label3);
+            this.panelGame.Controls.Add(this.playerName);
             this.panelGame.Controls.Add(this.label2);
             this.panelGame.Controls.Add(this.pictureBox3);
             this.panelGame.Controls.Add(this.button4);
@@ -165,16 +165,16 @@
             this.panelGame.Size = new System.Drawing.Size(686, 430);
             this.panelGame.TabIndex = 11;
             // 
-            // label3
+            // playerName
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(299, 373);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 24);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Player 1";
+            this.playerName.AutoSize = true;
+            this.playerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.playerName.ForeColor = System.Drawing.Color.White;
+            this.playerName.Location = new System.Drawing.Point(299, 373);
+            this.playerName.Name = "playerName";
+            this.playerName.Size = new System.Drawing.Size(62, 24);
+            this.playerName.TabIndex = 18;
+            this.playerName.Text = "Player";
             // 
             // label2
             // 
@@ -183,9 +183,9 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(299, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 24);
+            this.label2.Size = new System.Drawing.Size(95, 24);
             this.label2.TabIndex = 17;
-            this.label2.Text = "Player 2";
+            this.label2.Text = "Opponent";
             // 
             // pictureBox3
             // 
@@ -257,7 +257,7 @@
         private System.Windows.Forms.Button btnHost;
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.Panel panelGame;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label playerName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button button4;

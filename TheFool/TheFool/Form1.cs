@@ -371,8 +371,14 @@ namespace TheFool
 
         public void startGame()
         {
-            playerID = server.joinGame();
-            var a = true;
+            server.joinGame();
+        }
+
+        public void gameJoined(int playerID)
+        {
+            this.playerID = playerID;
+            playerName.Text = $"Player {playerID + 1}";
+            server.clientConnected();
         }
 
         public void startTurn(server.Card[] tableCards, server.Card[] playerCards)
@@ -380,11 +386,13 @@ namespace TheFool
             playedCards = tableCards.OfType<Card>().ToList();
             myCards = playerCards.OfType<Card>().ToList();
             Reload();
+            MessageBox.Show($"Player {playerID + 1}'s turn");
         }
 
         public void endGame()
         {
             MessageBox.Show("Your opponent has surrendered");
+            this.panelGame.Visible = false;
         }
 
         public void drawCards(server.Card[] playerCards)
@@ -396,11 +404,13 @@ namespace TheFool
         public void victory()
         {
             MessageBox.Show("You have won!");
+            this.panelGame.Visible = false;
         }
 
         public void loss()
         {
             MessageBox.Show("You have lost...");
+            this.panelGame.Visible = false;
         }
 
         public void receiveMessage(int playerID, string message)

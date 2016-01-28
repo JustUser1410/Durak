@@ -6,13 +6,6 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="joinGameResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="joinGameResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="play">
     <xs:complexType>
       <xs:sequence>
@@ -34,6 +27,11 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="playerID" type="xs:int" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="clientConnected">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="startGame">
@@ -76,6 +74,13 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="playerID" type="xs:int" />
         <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gameJoined">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="playerID" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

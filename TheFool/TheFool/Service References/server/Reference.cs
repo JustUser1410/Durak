@@ -132,11 +132,11 @@ namespace TheFool.server {
     [System.ServiceModel.ServiceContractAttribute(Namespace="Server", ConfigurationName="server.IService", CallbackContract=typeof(TheFool.server.IServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="Server/IService/joinGame", ReplyAction="Server/IService/joinGameResponse")]
-        int joinGame();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/joinGame")]
+        void joinGame();
         
-        [System.ServiceModel.OperationContractAttribute(Action="Server/IService/joinGame", ReplyAction="Server/IService/joinGameResponse")]
-        System.Threading.Tasks.Task<int> joinGameAsync();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/joinGame")]
+        System.Threading.Tasks.Task joinGameAsync();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/play")]
         void play(int playerID, TheFool.server.Card card);
@@ -155,6 +155,12 @@ namespace TheFool.server {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/surrender")]
         System.Threading.Tasks.Task surrenderAsync(int playerID);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/clientConnected")]
+        void clientConnected();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/clientConnected")]
+        System.Threading.Tasks.Task clientConnectedAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -180,6 +186,9 @@ namespace TheFool.server {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/receiveMessage")]
         void receiveMessage(int playerID, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/gameJoined")]
+        void gameJoined(int playerID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -210,11 +219,11 @@ namespace TheFool.server {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public int joinGame() {
-            return base.Channel.joinGame();
+        public void joinGame() {
+            base.Channel.joinGame();
         }
         
-        public System.Threading.Tasks.Task<int> joinGameAsync() {
+        public System.Threading.Tasks.Task joinGameAsync() {
             return base.Channel.joinGameAsync();
         }
         
@@ -240,6 +249,14 @@ namespace TheFool.server {
         
         public System.Threading.Tasks.Task surrenderAsync(int playerID) {
             return base.Channel.surrenderAsync(playerID);
+        }
+        
+        public void clientConnected() {
+            base.Channel.clientConnected();
+        }
+        
+        public System.Threading.Tasks.Task clientConnectedAsync() {
+            return base.Channel.clientConnectedAsync();
         }
     }
 }

@@ -28,5 +28,8 @@ namespace Server
 
         [OperationContract(IsOneWay = true)]
         void receiveMessage(int playerID, string message);
+
+        [OperationContract(IsOneWay = true)]
+        void gameJoined(int playerID);
     }
 }

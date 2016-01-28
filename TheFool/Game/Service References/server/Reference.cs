@@ -132,8 +132,8 @@ namespace Game.server {
     [System.ServiceModel.ServiceContractAttribute(Namespace="Server", ConfigurationName="server.IService", CallbackContract=typeof(Game.server.IServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="Server/IService/joinGame", ReplyAction="Server/IService/joinGameResponse")]
-        int joinGame();
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/joinGame")]
+        void joinGame();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/play")]
         void play(int playerID, Game.server.Card card);
@@ -143,6 +143,9 @@ namespace Game.server {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/surrender")]
         void surrender(int playerID);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/clientConnected")]
+        void clientConnected();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -168,6 +171,9 @@ namespace Game.server {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/receiveMessage")]
         void receiveMessage(int playerID, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/gameJoined")]
+        void gameJoined(int playerID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -198,8 +204,8 @@ namespace Game.server {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public int joinGame() {
-            return base.Channel.joinGame();
+        public void joinGame() {
+            base.Channel.joinGame();
         }
         
         public void play(int playerID, Game.server.Card card) {
@@ -212,6 +218,10 @@ namespace Game.server {
         
         public void surrender(int playerID) {
             base.Channel.surrender(playerID);
+        }
+        
+        public void clientConnected() {
+            base.Channel.clientConnected();
         }
     }
 }

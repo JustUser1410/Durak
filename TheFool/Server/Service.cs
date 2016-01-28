@@ -9,6 +9,7 @@ namespace Server
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Reentrant, UseSynchronizationContext = false)]
     public class Service : IService
     {
+        private int connectedClients;
         private List<Card> deck;
         private List<Card> tableCards;
         private List<Card>[] playerCards;
@@ -16,21 +17,18 @@ namespace Server
 
         public Service()
         {
+            connectedClients = 0;
             deck = new List<Card>();
             tableCards  = new List<Card>();
             playerCards = new List<Card>[2] { new List<Card>(), new List<Card>() };
             playerCallbacks = new List<IClient>();
         }
 
-        public int joinGame()
+        public void clientConnected()
         {
-            var playerID = playerCallbacks.Count;
+            connectedClients++;
 
-            var clientCallback = OperationContext.Current.GetCallbackChannel<IClient>();
-            playerCallbacks.Add(clientCallback);
-
-            // We can start game when quorum is reached
-            if (playerCallbacks.Count == 2)
+            if (connectedClients == 2)
             {
                 generateCards();
                 shuffleDeck();
@@ -38,11 +36,18 @@ namespace Server
 
                 playerCallbacks[0].drawCards(playerCards[0]);
                 playerCallbacks[1].drawCards(playerCards[1]);
-
+                
                 playerCallbacks[0].startTurn(tableCards, playerCards[0]);
             }
+        }
 
-            return playerID;
+        public void joinGame()
+        {
+            var playerID = playerCallbacks.Count;
+
+            var clientCallback = OperationContext.Current.GetCallbackChannel<IClient>();
+            playerCallbacks.Add(clientCallback);
+            clientCallback.gameJoined(playerCallbacks.Count - 1);
         }
 
         public void play(int playerID, Card card)

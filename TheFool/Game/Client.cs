@@ -30,9 +30,15 @@ namespace Game
 
         public void startGame()
         {
-            playerID = server.joinGame();
+            server.joinGame();
+        }
+
+        public void gameJoined(int playerID)
+        {
+            this.playerID = playerID;
             Console.WriteLine($"Welcome Player {playerID + 1}");
             Console.WriteLine("Waiting for all players...");
+            server.clientConnected();
         }
 
         public void startTurn(Card[] cardsOnTable, Card[] playerCards)
