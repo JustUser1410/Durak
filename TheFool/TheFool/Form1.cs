@@ -259,9 +259,10 @@ namespace TheFool
             if (playerTurn)
             {
                 int index = Convert.ToInt32(((PictureBox)sender).Name);
-                server.play(playerID, myCards[index]);
-                playedCards.Add(myCards[index]);
-                myCards.RemoveAt(index);
+                var playedCard = myCards[index];
+                server.play(playerID, playedCard);
+                playedCards.Add(playedCard);
+                myCards.Remove(playedCard);
                 playerTurn = false;
                 labelMessage.Text = "Waiting for Opponent";
                 Reload();
