@@ -20,6 +20,7 @@ namespace TheFool
         private List<Card> playedCards;
         private int playerID;
         private ServiceClient server;
+        private bool playerTurn;
 
         public Form1()
         {
@@ -28,6 +29,7 @@ namespace TheFool
             this.panelMain.Visible = true;
             this.pictureBoxList = new List<PictureBox>();
             server = new ServiceClient(new InstanceContext(this));
+            playerTurn = false;
 
             //--------------Generate Cards---------------
             playedCards = new List<Card>();
@@ -51,6 +53,7 @@ namespace TheFool
         private void button4_Click(object sender, EventArgs e)
         {
             this.panelGame.Visible = false;
+            labelMessage.Text = "You have surrendered.";
             server.surrender(playerID);
         }
 
@@ -249,11 +252,21 @@ namespace TheFool
         /// <param name="e"></param>
         void box_Click(object sender, EventArgs e)
         {
-            int index = Convert.ToInt32(((PictureBox)sender).Name);
-            server.play(playerID, myCards[index]);
-            playedCards.Add(myCards[index]);
-            myCards.RemoveAt(index);
-            Reload();
+            if (playerTurn)
+            {
+                int index = Convert.ToInt32(((PictureBox)sender).Name);
+                server.play(playerID, myCards[index]);
+                playedCards.Add(myCards[index]);
+                myCards.RemoveAt(index);
+                playerTurn = false;
+                labelMessage.Text = "Waiting for Opponent";
+                Reload();
+            }
+            else
+            {
+                labelMessage.Text = "Hold your horses! Waiting for Opponent";
+            }
+            
         }
 
         private void Reload()
@@ -378,20 +391,22 @@ namespace TheFool
         {
             this.playerID = playerID;
             playerName.Text = $"Player {playerID + 1}";
+            labelMessage.Text = playerID == 0 ? "Waiting for another player to join" : "Waiting for Opponent";
             server.clientConnected();
         }
 
         public void startTurn(server.Card[] tableCards, server.Card[] playerCards)
         {
+            playerTurn = true;
+            labelMessage.Text = "It's your turn!";
             playedCards = tableCards.OfType<Card>().ToList();
             myCards = playerCards.OfType<Card>().ToList();
             Reload();
-            MessageBox.Show($"Player {playerID + 1}'s turn");
         }
 
         public void endGame()
         {
-            MessageBox.Show("Your opponent has surrendered");
+            labelMessage.Text = "Your opponent has surrendered";
             this.panelGame.Visible = false;
         }
 
@@ -403,13 +418,13 @@ namespace TheFool
 
         public void victory()
         {
-            MessageBox.Show("You have won!");
+            labelMessage.Text = "You have won!";
             this.panelGame.Visible = false;
         }
 
         public void loss()
         {
-            MessageBox.Show("You have lost...");
+            labelMessage.Text = "You have lost...";
             this.panelGame.Visible = false;
         }
 
