@@ -21,6 +21,9 @@ namespace TheFool
         private int playerID;
         private ServiceClient server;
         private bool playerTurn;
+        private int gamesWon;
+        private int gamesLost;
+        private bool gameStarted;
 
         public Form1()
         {
@@ -30,6 +33,9 @@ namespace TheFool
             this.pictureBoxList = new List<PictureBox>();
             server = new ServiceClient(new InstanceContext(this));
             playerTurn = false;
+            gamesWon = 0;
+            gamesLost = 0;
+            gameStarted = false;
 
             //--------------Generate Cards---------------
             playedCards = new List<Card>();
@@ -45,15 +51,13 @@ namespace TheFool
             ShowOpCArds(6);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             this.panelGame.Visible = false;
             labelMessage.Text = "You have surrendered.";
+            gameStarted = false;
+            chatMessages.Items.Clear();
+            gamesLost++;
             server.surrender(playerID);
         }
 
@@ -391,12 +395,21 @@ namespace TheFool
         {
             this.playerID = playerID;
             playerName.Text = $"Player {playerID + 1}";
-            labelMessage.Text = playerID == 0 ? "Waiting for another player to join" : "Waiting for Opponent";
+            if (playerID == 0)
+            {
+                labelMessage.Text = "Waiting for another player to join";
+            }
+            else
+            {
+                labelMessage.Text = "Waiting for opponent";
+                gameStarted = true;
+            }
             server.clientConnected();
         }
 
         public void startTurn(server.Card[] tableCards, server.Card[] playerCards)
         {
+            gameStarted = true;
             playerTurn = true;
             labelMessage.Text = "It's your turn!";
             playedCards = tableCards.OfType<Card>().ToList();
@@ -408,6 +421,8 @@ namespace TheFool
         {
             labelMessage.Text = "Your opponent has surrendered";
             this.panelGame.Visible = false;
+            chatMessages.Items.Clear();
+            gamesWon++;
         }
 
         public void drawCards(server.Card[] playerCards)
@@ -420,12 +435,18 @@ namespace TheFool
         {
             labelMessage.Text = "You have won!";
             this.panelGame.Visible = false;
+            gameStarted = false;
+            chatMessages.Items.Clear();
+            gamesWon++;
         }
 
         public void loss()
         {
             labelMessage.Text = "You have lost...";
             this.panelGame.Visible = false;
+            chatMessages.Items.Clear();
+            gameStarted = false;
+            gamesLost++;
         }
 
         public void receiveMessage(int playerID, string message)
@@ -435,16 +456,25 @@ namespace TheFool
 
         private void buttonChatSend_Click(object sender, EventArgs e)
         {
-            if (chatInput.Text != "")
+            if (chatInput.Text != "" && gameStarted)
             {
                 server.sendMessage(playerID, chatInput.Text);
                 chatMessages.Items.Add($"You: {chatInput.Text}");
                 chatInput.Text = "";
             }
-            else
+            else if (chatInput.Text == "" && gameStarted)
             {
                 MessageBox.Show("You need to type a message!");
             }
+            else
+            {
+                MessageBox.Show("Waiting for another player to join");
+            }
+        }
+
+        private void btnStats_Click(object sender, EventArgs e)
+        {
+            labelMessage.Text = $"Games Played: {gamesWon + gamesLost}. Games Won: {gamesWon}. Games Lost: {gamesLost}";
         }
     }
 }

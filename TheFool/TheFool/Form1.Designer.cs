@@ -67,6 +67,7 @@
             this.btnStats.TabIndex = 14;
             this.btnStats.Text = "Statistics";
             this.btnStats.UseVisualStyleBackColor = true;
+            this.btnStats.Click += new System.EventHandler(this.btnStats_Click);
             // 
             // button2
             // 
@@ -98,7 +99,7 @@
             this.panelGame.Controls.Add(this.pictureBox3);
             this.panelGame.Controls.Add(this.button4);
             this.panelGame.Controls.Add(this.pictureBox14);
-            this.panelGame.Location = new System.Drawing.Point(12, 32);
+            this.panelGame.Location = new System.Drawing.Point(3, 35);
             this.panelGame.Name = "panelGame";
             this.panelGame.Size = new System.Drawing.Size(942, 430);
             this.panelGame.TabIndex = 11;
@@ -208,7 +209,6 @@
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "The Fool";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.panelMain.ResumeLayout(false);
             this.panelGame.ResumeLayout(false);
             this.panelGame.PerformLayout();
