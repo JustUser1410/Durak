@@ -16,6 +16,15 @@ namespace Server
         private List<Card> cardsPlayer2;
         private List<IClient> playerCallbacks;
 
+        public Service()
+        {
+            deck = new List<Card>();
+            cardsOnTable = new List<Card>();
+            cardsPlayer1 = new List<Card>();
+            cardsPlayer2 = new List<Card>();
+            playerCallbacks = new List<IClient>();
+        }
+
         public int joinGame()
         {
             var playerID = playerCallbacks.Count;
