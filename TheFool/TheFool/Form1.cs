@@ -24,6 +24,7 @@ namespace TheFool
         private int gamesWon;
         private int gamesLost;
         private bool gameStarted;
+        private int tag = 0;
 
         public Form1()
         {
@@ -196,6 +197,7 @@ namespace TheFool
             foreach (Card c in playedCards)
             {
                 PictureBox box = new PictureBox();
+                
                 // Match card with the picture
                 box.Image = MapCard(c.suit, c.value);
                 // set the location
@@ -232,6 +234,8 @@ namespace TheFool
                 PictureBox box = new PictureBox();
                 // Match card with the picture
                 box.Image = MapCard(c.suit, c.value);
+                box.Tag = myCards.IndexOf(c);
+                
                 // set the location
                 box.Location = new Point(x, y);
                 box.Width = 50;
@@ -258,7 +262,8 @@ namespace TheFool
         {
             if (playerTurn)
             {
-                int index = Convert.ToInt32(((PictureBox)sender).Name);
+                int index = int.Parse(((PictureBox)sender).Tag.ToString());
+                //int index = Convert.ToInt32(((PictureBox)sender).Name);
                 var playedCard = myCards[index];
                 server.play(playerID, playedCard);
                 playedCards.Add(playedCard);
@@ -395,7 +400,7 @@ namespace TheFool
         public void gameJoined(int playerID)
         {
             this.playerID = playerID;
-            playerName.Text = $"Player {playerID + 1}";
+            playerName.Text = "Player " + (playerID + 1);
             if (playerID == 0)
             {
                 labelMessage.Text = "Waiting for another player to join";
@@ -452,7 +457,7 @@ namespace TheFool
 
         public void receiveMessage(int playerID, string message)
         {
-            chatMessages.Items.Add($"Opponent: {message}");
+            chatMessages.Items.Add("Opponent: " + message);
         }
 
         private void buttonChatSend_Click(object sender, EventArgs e)
@@ -460,7 +465,7 @@ namespace TheFool
             if (chatInput.Text != "" && gameStarted)
             {
                 server.sendMessage(playerID, chatInput.Text);
-                chatMessages.Items.Add($"You: {chatInput.Text}");
+                chatMessages.Items.Add("You: " + chatInput.Text);
                 chatInput.Text = "";
             }
             else if (chatInput.Text == "" && gameStarted)
@@ -475,7 +480,7 @@ namespace TheFool
 
         private void btnStats_Click(object sender, EventArgs e)
         {
-            labelMessage.Text = $"Games Played: {gamesWon + gamesLost}. Games Won: {gamesWon}. Games Lost: {gamesLost}";
+            labelMessage.Text = "Games Played: " + (gamesWon + gamesLost) + ". Games Won: " + gamesWon + ". Games Lost: " + gamesLost;
         }
     }
 }
