@@ -25,7 +25,7 @@ namespace Game
 
         public void endGame()
         {
-            Console.WriteLine("Opponent has surrendered");
+            Console.WriteLine("\nOpponent has surrendered");
         }
 
         public void startGame()
@@ -37,10 +37,10 @@ namespace Game
 
         public void startTurn(Card[] cardsOnTable, Card[] playerCards)
         {
-            Console.WriteLine("IT's YOUR TURN!");
+            Console.WriteLine("\n=============\nIT's YOUR TURN!");
             Console.WriteLine("Cards on Table:");
             printCards(cardsOnTable);
-            Console.WriteLine("Available Cards:");
+            Console.WriteLine("\nAvailable Cards:");
             printCards(playerCards);
 
             Console.Write("\nChoose card to play: ");

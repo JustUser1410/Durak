@@ -6,7 +6,7 @@ using System.ServiceModel;
 
 namespace Server
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Reentrant, UseSynchronizationContext = false)]
     public class Service : IService
     {
         private List<Card> deck;
@@ -35,6 +35,11 @@ namespace Server
                 generateCards();
                 shuffleDeck();
                 dealCards();
+
+                playerCallbacks[0].drawCards(playerCards[0]);
+                playerCallbacks[1].drawCards(playerCards[1]);
+
+                playerCallbacks[0].startTurn(tableCards, playerCards[0]);
             }
 
             return playerID;
@@ -108,11 +113,6 @@ namespace Server
                 playerCards[1].Add(deck[0]);
                 deck.RemoveAt(0);
             }
-
-            playerCallbacks[0].drawCards(playerCards[0]);
-            playerCallbacks[1].drawCards(playerCards[1]);
-
-            playerCallbacks[0].startTurn(tableCards, playerCards[0]);
         }
     }
 }

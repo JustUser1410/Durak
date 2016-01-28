@@ -8,44 +8,38 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheFool.server;
+using System.ServiceModel;
 
 namespace TheFool
 {
-    public struct Card
-    {
-        public CardValues value;
-        public CardSuit suit;
 
-        public Card(CardValues value, CardSuit suit)
-        {
-            this.value = value;
-            this.suit = suit;
-        }
-    }
-
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IServiceCallback
     {
         public List<PictureBox> pictureBoxList;
         private List<Card> myCards;
         private List<Card> playedCards;
+        private int playerID;
+        private ServiceClient server;
+
         public Form1()
         {
             InitializeComponent();
             this.panelGame.Visible = false;
             this.panelMain.Visible = true;
             this.pictureBoxList = new List<PictureBox>();
+            server = new ServiceClient(new InstanceContext(this));
 
             //--------------Generate Cards---------------
             playedCards = new List<Card>();
             myCards = new List<Card>();
-            myCards.Add(new Card(CardValues.EIGHT, CardSuit.CLUBS));
-            myCards.Add(new Card(CardValues.NINE, CardSuit.HEARTS));
-            myCards.Add(new Card(CardValues.KING, CardSuit.CLUBS));
-            myCards.Add(new Card(CardValues.SIX, CardSuit.SPADES));
-            myCards.Add(new Card(CardValues.ACE, CardSuit.DIAMONDS));
-            myCards.Add(new Card(CardValues.QUEEN, CardSuit.CLUBS));
+            //myCards.Add(new Card(CardValues.EIGHT, CardSuit.CLUBS));
+            //myCards.Add(new Card(CardValues.NINE, CardSuit.HEARTS));
+            //myCards.Add(new Card(CardValues.KING, CardSuit.CLUBS));
+            //myCards.Add(new Card(CardValues.SIX, CardSuit.SPADES));
+            //myCards.Add(new Card(CardValues.ACE, CardSuit.DIAMONDS));
+            //myCards.Add(new Card(CardValues.QUEEN, CardSuit.CLUBS));
 
-            ShowMyCards(myCards);
+            ShowMyCards();
             ShowOpCArds(6);
         }
 
@@ -57,6 +51,7 @@ namespace TheFool
         private void button4_Click(object sender, EventArgs e)
         {
             this.panelGame.Visible = false;
+            server.surrender(playerID);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -67,6 +62,7 @@ namespace TheFool
         private void btnPlay_Click_1(object sender, EventArgs e)
         {
             this.panelGame.Visible = true;
+            startGame();
         }
 
         private void pictureBox13_Click(object sender, EventArgs e)
@@ -185,12 +181,12 @@ namespace TheFool
             }
         }
 
-        private void ShowPlayedCards(List<Card> cards)
+        private void ShowPlayedCards()
         {
             int x = 150,
                 y = 170;
             bool attack = true;
-            foreach (Card c in cards)
+            foreach (Card c in playedCards)
             {
                 PictureBox box = new PictureBox();
                 // Match card with the picture
@@ -219,12 +215,12 @@ namespace TheFool
             }
         }
 
-        private void ShowMyCards(List<Card> cards)
+        private void ShowMyCards()
         {
             int x = 150,
                 y = 286;
             int count = 0;
-            foreach (Card c in cards)
+            foreach (Card c in myCards)
             {
                 PictureBox box = new PictureBox();
                 // Match card with the picture
@@ -254,6 +250,7 @@ namespace TheFool
         void box_Click(object sender, EventArgs e)
         {
             int index = Convert.ToInt32(((PictureBox)sender).Name);
+            server.play(playerID, myCards[index]);
             playedCards.Add(myCards[index]);
             myCards.RemoveAt(index);
             Reload();
@@ -264,8 +261,8 @@ namespace TheFool
             for (int ix = this.panelGame.Controls.Count - 1; ix >= 0; ix--)
                 if (this.panelGame.Controls[ix] is PictureBox) 
                     this.panelGame.Controls[ix].Dispose();
-            ShowMyCards(myCards);
-            ShowPlayedCards(playedCards);
+            ShowMyCards();
+            ShowPlayedCards();
             ShowOpCArds(6);
             // bring "defence" cards to front
             for (int ix = this.panelGame.Controls.Count - 1; ix >= 0; ix--)
@@ -370,6 +367,45 @@ namespace TheFool
             }
             else
                 return TheFool.Properties.Resources.back;
+        }
+
+        public void startGame()
+        {
+            playerID = server.joinGame();
+            var a = true;
+        }
+
+        public void startTurn(server.Card[] tableCards, server.Card[] playerCards)
+        {
+            playedCards = tableCards.OfType<Card>().ToList();
+            myCards = playerCards.OfType<Card>().ToList();
+            Reload();
+        }
+
+        public void endGame()
+        {
+            MessageBox.Show("Your opponent has surrendered");
+        }
+
+        public void drawCards(server.Card[] playerCards)
+        {
+            myCards = playerCards.OfType<Card>().ToList();
+            Reload();
+        }
+
+        public void victory()
+        {
+            MessageBox.Show("You have won!");
+        }
+
+        public void loss()
+        {
+            MessageBox.Show("You have lost...");
+        }
+
+        public void receiveMessage(int playerID, string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }
