@@ -137,6 +137,12 @@ namespace Game.server {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/play")]
         void play(int playerID, Game.server.Card card);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/sendMessage")]
+        void sendMessage(int playerID, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/surrender")]
+        void surrender(int playerID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -159,6 +165,9 @@ namespace Game.server {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/loss")]
         void loss();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/receiveMessage")]
+        void receiveMessage(int playerID, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -195,6 +204,14 @@ namespace Game.server {
         
         public void play(int playerID, Game.server.Card card) {
             base.Channel.play(playerID, card);
+        }
+        
+        public void sendMessage(int playerID, string message) {
+            base.Channel.sendMessage(playerID, message);
+        }
+        
+        public void surrender(int playerID) {
+            base.Channel.surrender(playerID);
         }
     }
 }

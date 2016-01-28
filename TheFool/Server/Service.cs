@@ -9,7 +9,6 @@ namespace Server
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Service : IService
     {
-        private int nextPlayerID;
         private List<Card> deck;
         private List<Card> tableCards;
         private List<Card>[] playerCards;
@@ -45,15 +44,7 @@ namespace Server
         {
             tableCards.Add(card);
             playerCards[playerID].Remove(card);
-
-            if (playerID == 0)
-            {
-                nextPlayerID = 1;
-            }
-            else if (playerID == 1)
-            {
-                nextPlayerID = 0;
-            }
+            var nextPlayerID = playerID == 0 ? 1 : 0;
 
             if (playerCards[playerID].Count == 0)
             {
@@ -64,6 +55,18 @@ namespace Server
             {
                 playerCallbacks[nextPlayerID].startTurn(tableCards, playerCards[nextPlayerID]);
             }
+        }
+
+        public void sendMessage(int playerID, string message)
+        {
+            var receipient = playerID == 0 ? 1 : 0;
+            playerCallbacks[receipient].receiveMessage(playerID, message);
+        }
+
+        public void surrender(int playerID)
+        {
+            var opponent = playerID == 0 ? 1 : 0;
+            playerCallbacks[opponent].endGame();
         }
 
         // ====================================================================

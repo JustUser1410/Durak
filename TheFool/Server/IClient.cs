@@ -25,5 +25,8 @@ namespace Server
 
         [OperationContract(IsOneWay = true)]
         void loss();
+
+        [OperationContract(IsOneWay = true)]
+        void receiveMessage(int playerID, string message);
     }
 }

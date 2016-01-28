@@ -14,5 +14,11 @@ namespace Server
 
         [OperationContract(IsOneWay = true)]
         void play(int playerID, Card card);
+
+        [OperationContract(IsOneWay = true)]
+        void sendMessage(int playerID, string message);
+
+        [OperationContract(IsOneWay = true)]
+        void surrender(int playerID);
     }
 }

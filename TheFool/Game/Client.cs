@@ -25,7 +25,7 @@ namespace Game
 
         public void endGame()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Opponent has surrendered");
         }
 
         public void startGame()
@@ -57,6 +57,11 @@ namespace Game
         public void loss()
         {
             Console.WriteLine("\n\nYou have lost...");
+        }
+
+        public void receiveMessage(int playerID, string message)
+        {
+
         }
 
         private void printCards(Card[] cards)
