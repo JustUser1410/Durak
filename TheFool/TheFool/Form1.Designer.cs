@@ -40,11 +40,14 @@
             this.btnHost = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.panelGame = new System.Windows.Forms.Panel();
+            this.chatInput = new System.Windows.Forms.TextBox();
+            this.chatMessages = new System.Windows.Forms.ListBox();
             this.playerName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
+            this.buttonChatSend = new System.Windows.Forms.Button();
             this.panelMain.SuspendLayout();
             this.panelGame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -155,6 +158,9 @@
             // 
             // panelGame
             // 
+            this.panelGame.Controls.Add(this.buttonChatSend);
+            this.panelGame.Controls.Add(this.chatInput);
+            this.panelGame.Controls.Add(this.chatMessages);
             this.panelGame.Controls.Add(this.playerName);
             this.panelGame.Controls.Add(this.label2);
             this.panelGame.Controls.Add(this.pictureBox3);
@@ -162,8 +168,25 @@
             this.panelGame.Controls.Add(this.pictureBox14);
             this.panelGame.Location = new System.Drawing.Point(3, 35);
             this.panelGame.Name = "panelGame";
-            this.panelGame.Size = new System.Drawing.Size(686, 430);
+            this.panelGame.Size = new System.Drawing.Size(942, 430);
             this.panelGame.TabIndex = 11;
+            // 
+            // chatInput
+            // 
+            this.chatInput.AcceptsReturn = true;
+            this.chatInput.Location = new System.Drawing.Point(688, 398);
+            this.chatInput.Name = "chatInput";
+            this.chatInput.Size = new System.Drawing.Size(159, 20);
+            this.chatInput.TabIndex = 20;
+            // 
+            // chatMessages
+            // 
+            this.chatMessages.FormattingEnabled = true;
+            this.chatMessages.Location = new System.Drawing.Point(688, 13);
+            this.chatMessages.Name = "chatMessages";
+            this.chatMessages.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.chatMessages.Size = new System.Drawing.Size(242, 381);
+            this.chatMessages.TabIndex = 19;
             // 
             // playerName
             // 
@@ -219,12 +242,22 @@
             this.pictureBox14.TabIndex = 16;
             this.pictureBox14.TabStop = false;
             // 
+            // buttonChatSend
+            // 
+            this.buttonChatSend.Location = new System.Drawing.Point(853, 396);
+            this.buttonChatSend.Name = "buttonChatSend";
+            this.buttonChatSend.Size = new System.Drawing.Size(75, 23);
+            this.buttonChatSend.TabIndex = 21;
+            this.buttonChatSend.Text = "Send";
+            this.buttonChatSend.UseVisualStyleBackColor = true;
+            this.buttonChatSend.Click += new System.EventHandler(this.buttonChatSend_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowText;
-            this.ClientSize = new System.Drawing.Size(689, 465);
+            this.ClientSize = new System.Drawing.Size(957, 465);
             this.Controls.Add(this.panelGame);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.button3);
@@ -262,7 +295,9 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.PictureBox pictureBox14;
-
+        private System.Windows.Forms.TextBox chatInput;
+        private System.Windows.Forms.ListBox chatMessages;
+        private System.Windows.Forms.Button buttonChatSend;
     }
 }
 

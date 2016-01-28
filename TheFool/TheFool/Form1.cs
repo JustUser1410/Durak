@@ -415,7 +415,21 @@ namespace TheFool
 
         public void receiveMessage(int playerID, string message)
         {
-            throw new NotImplementedException();
+            chatMessages.Items.Add($"Opponent: {message}");
+        }
+
+        private void buttonChatSend_Click(object sender, EventArgs e)
+        {
+            if (chatInput.Text != "")
+            {
+                server.sendMessage(playerID, chatInput.Text);
+                chatMessages.Items.Add($"You: {chatInput.Text}");
+                chatInput.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("You need to type a message!");
+            }
         }
     }
 }
