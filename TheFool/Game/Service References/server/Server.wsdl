@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="Server" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="Server" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="Server/Imports">
+      <xsd:import namespace="Server" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Server" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IService_joinGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:joinGame" />
+  </wsdl:message>
+  <wsdl:message name="IService_joinGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:joinGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_play_InputMessage">
+    <wsdl:part name="parameters" element="tns:play" />
+  </wsdl:message>
+  <wsdl:message name="IService_startGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:startGame" />
+  </wsdl:message>
+  <wsdl:message name="IService_startTurn_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:startTurn" />
+  </wsdl:message>
+  <wsdl:message name="IService_endGame_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:endGame" />
+  </wsdl:message>
+  <wsdl:message name="IService_drawCards_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:drawCards" />
+  </wsdl:message>
+  <wsdl:message name="IService_victory_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:victory" />
+  </wsdl:message>
+  <wsdl:message name="IService_loss_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:loss" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="IService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="joinGame">
+      <wsdl:input wsaw:Action="Server/IService/joinGame" message="tns:IService_joinGame_InputMessage" />
+      <wsdl:output wsaw:Action="Server/IService/joinGameResponse" message="tns:IService_joinGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="play">
+      <wsdl:input wsaw:Action="Server/IService/play" message="tns:IService_play_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="startGame">
+      <wsdl:output wsaw:Action="Server/IService/startGame" message="tns:IService_startGame_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="startTurn">
+      <wsdl:output wsaw:Action="Server/IService/startTurn" message="tns:IService_startTurn_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="endGame">
+      <wsdl:output wsaw:Action="Server/IService/endGame" message="tns:IService_endGame_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="drawCards">
+      <wsdl:output wsaw:Action="Server/IService/drawCards" message="tns:IService_drawCards_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="victory">
+      <wsdl:output wsaw:Action="Server/IService/victory" message="tns:IService_victory_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="loss">
+      <wsdl:output wsaw:Action="Server/IService/loss" message="tns:IService_loss_OutputCallbackMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -7,8 +7,8 @@ namespace Server
 {
     public struct Card
     {
-        CardValues value;
-        CardSuit suit;
+        public CardValues value;
+        public CardSuit suit;
 
         public Card(CardValues value, CardSuit suit)
         {

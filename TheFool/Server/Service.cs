@@ -11,17 +11,15 @@ namespace Server
     {
         private int nextPlayerID;
         private List<Card> deck;
-        private List<Card> cardsOnTable;
-        private List<Card> cardsPlayer1;
-        private List<Card> cardsPlayer2;
+        private List<Card> tableCards;
+        private List<Card>[] playerCards;
         private List<IClient> playerCallbacks;
 
         public Service()
         {
             deck = new List<Card>();
-            cardsOnTable = new List<Card>();
-            cardsPlayer1 = new List<Card>();
-            cardsPlayer2 = new List<Card>();
+            tableCards  = new List<Card>();
+            playerCards = new List<Card>[2] { new List<Card>(), new List<Card>() };
             playerCallbacks = new List<IClient>();
         }
 
@@ -45,6 +43,9 @@ namespace Server
 
         public void play(int playerID, Card card)
         {
+            tableCards.Add(card);
+            playerCards[playerID].Remove(card);
+
             if (playerID == 0)
             {
                 nextPlayerID = 1;
@@ -54,9 +55,15 @@ namespace Server
                 nextPlayerID = 0;
             }
 
-            cardsOnTable.Add(card);
-
-            playerCallbacks[nextPlayerID].startTurn(cardsOnTable);
+            if (playerCards[playerID].Count == 0)
+            {
+                playerCallbacks[playerID].victory();
+                playerCallbacks[nextPlayerID].loss();
+            }
+            else
+            {
+                playerCallbacks[nextPlayerID].startTurn(tableCards, playerCards[nextPlayerID]);
+            }
         }
 
         // ====================================================================
@@ -91,16 +98,18 @@ namespace Server
 
         private void dealCards()
         {
-            while (cardsPlayer1.Count < 6 && cardsPlayer2.Count < 6)
+            for (int i = 0; i < 6; i++)
             {
-                cardsPlayer1.Add(deck[0]);
+                playerCards[0].Add(deck[0]);
                 deck.RemoveAt(0);
-                cardsPlayer2.Add(deck[0]);
+                playerCards[1].Add(deck[0]);
                 deck.RemoveAt(0);
             }
 
-            playerCallbacks[0].drawCards(cardsPlayer1);
-            playerCallbacks[1].drawCards(cardsPlayer2);
+            playerCallbacks[0].drawCards(playerCards[0]);
+            playerCallbacks[1].drawCards(playerCards[1]);
+
+            playerCallbacks[0].startTurn(tableCards, playerCards[0]);
         }
     }
 }

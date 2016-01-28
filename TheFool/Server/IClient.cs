@@ -12,12 +12,18 @@ namespace Server
         void startGame();
 
         [OperationContract(IsOneWay = true)]
-        void startTurn(List<Card> cardsOnDeck);
+        void startTurn(List<Card> tableCards, List<Card> playerCards);
 
         [OperationContract(IsOneWay = true)]
         void endGame();
 
         [OperationContract(IsOneWay = true)]
-        void drawCards(List<Card> cards);
+        void drawCards(List<Card> playerCards);
+
+        [OperationContract(IsOneWay = true)]
+        void victory();
+
+        [OperationContract(IsOneWay = true)]
+        void loss();
     }
 }
