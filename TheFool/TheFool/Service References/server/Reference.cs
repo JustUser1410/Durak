@@ -22,12 +22,44 @@ namespace TheFool.server {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TheFool.server.CardSuit suitField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TheFool.server.CardValues valueField;
+        
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
                 return this.extensionDataField;
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TheFool.server.CardSuit suit {
+            get {
+                return this.suitField;
+            }
+            set {
+                if ((this.suitField.Equals(value) != true)) {
+                    this.suitField = value;
+                    this.RaisePropertyChanged("suit");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TheFool.server.CardValues value {
+            get {
+                return this.valueField;
+            }
+            set {
+                if ((this.valueField.Equals(value) != true)) {
+                    this.valueField = value;
+                    this.RaisePropertyChanged("value");
+                }
             }
         }
         
@@ -39,6 +71,61 @@ namespace TheFool.server {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CardSuit", Namespace="http://schemas.datacontract.org/2004/07/Server")]
+    public enum CardSuit : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NULL = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        HEARTS = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DIAMONDS = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CLUBS = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SPADES = 4,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CardValues", Namespace="http://schemas.datacontract.org/2004/07/Server")]
+    public enum CardValues : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NULL = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SIX = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SEVEN = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        EIGHT = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NINE = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        TEN = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        JACK = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        QUEEN = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        KING = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ACE = 14,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -56,6 +143,18 @@ namespace TheFool.server {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/play")]
         System.Threading.Tasks.Task playAsync(int playerID, TheFool.server.Card card);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/sendMessage")]
+        void sendMessage(int playerID, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/sendMessage")]
+        System.Threading.Tasks.Task sendMessageAsync(int playerID, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/surrender")]
+        void surrender(int playerID);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/surrender")]
+        System.Threading.Tasks.Task surrenderAsync(int playerID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -65,13 +164,22 @@ namespace TheFool.server {
         void startGame();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/startTurn")]
-        void startTurn(TheFool.server.Card[] cardsOnDeck);
+        void startTurn(TheFool.server.Card[] tableCards, TheFool.server.Card[] playerCards);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/endGame")]
         void endGame();
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/drawCards")]
-        void drawCards(TheFool.server.Card[] cards);
+        void drawCards(TheFool.server.Card[] playerCards);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/victory")]
+        void victory();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/loss")]
+        void loss();
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="Server/IService/receiveMessage")]
+        void receiveMessage(int playerID, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -116,6 +224,22 @@ namespace TheFool.server {
         
         public System.Threading.Tasks.Task playAsync(int playerID, TheFool.server.Card card) {
             return base.Channel.playAsync(playerID, card);
+        }
+        
+        public void sendMessage(int playerID, string message) {
+            base.Channel.sendMessage(playerID, message);
+        }
+        
+        public System.Threading.Tasks.Task sendMessageAsync(int playerID, string message) {
+            return base.Channel.sendMessageAsync(playerID, message);
+        }
+        
+        public void surrender(int playerID) {
+            base.Channel.surrender(playerID);
+        }
+        
+        public System.Threading.Tasks.Task surrenderAsync(int playerID) {
+            return base.Channel.surrenderAsync(playerID);
         }
     }
 }

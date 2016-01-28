@@ -21,6 +21,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="sendMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="playerID" type="xs:int" />
+        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="surrender">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="playerID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="startGame">
     <xs:complexType>
       <xs:sequence />
@@ -29,7 +44,8 @@
   <xs:element name="startTurn">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Server" minOccurs="0" name="cardsOnDeck" nillable="true" type="q2:ArrayOfCard" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Server" minOccurs="0" name="tableCards" nillable="true" type="q2:ArrayOfCard" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server" minOccurs="0" name="playerCards" nillable="true" type="q3:ArrayOfCard" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -41,7 +57,25 @@
   <xs:element name="drawCards">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Server" minOccurs="0" name="cards" nillable="true" type="q3:ArrayOfCard" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Server" minOccurs="0" name="playerCards" nillable="true" type="q4:ArrayOfCard" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="victory">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="loss">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="receiveMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="playerID" type="xs:int" />
+        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

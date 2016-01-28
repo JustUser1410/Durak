@@ -16,6 +16,12 @@
   <wsdl:message name="IService_play_InputMessage">
     <wsdl:part name="parameters" element="tns:play" />
   </wsdl:message>
+  <wsdl:message name="IService_sendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendMessage" />
+  </wsdl:message>
+  <wsdl:message name="IService_surrender_InputMessage">
+    <wsdl:part name="parameters" element="tns:surrender" />
+  </wsdl:message>
   <wsdl:message name="IService_startGame_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:startGame" />
   </wsdl:message>
@@ -28,6 +34,15 @@
   <wsdl:message name="IService_drawCards_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:drawCards" />
   </wsdl:message>
+  <wsdl:message name="IService_victory_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:victory" />
+  </wsdl:message>
+  <wsdl:message name="IService_loss_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:loss" />
+  </wsdl:message>
+  <wsdl:message name="IService_receiveMessage_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:receiveMessage" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="IService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="joinGame">
       <wsdl:input wsaw:Action="Server/IService/joinGame" message="tns:IService_joinGame_InputMessage" />
@@ -35,6 +50,12 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="play">
       <wsdl:input wsaw:Action="Server/IService/play" message="tns:IService_play_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="sendMessage">
+      <wsdl:input wsaw:Action="Server/IService/sendMessage" message="tns:IService_sendMessage_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="surrender">
+      <wsdl:input wsaw:Action="Server/IService/surrender" message="tns:IService_surrender_InputMessage" />
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="startGame">
       <wsdl:output wsaw:Action="Server/IService/startGame" message="tns:IService_startGame_OutputCallbackMessage" />
@@ -47,6 +68,15 @@
     </wsdl:operation>
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="drawCards">
       <wsdl:output wsaw:Action="Server/IService/drawCards" message="tns:IService_drawCards_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="victory">
+      <wsdl:output wsaw:Action="Server/IService/victory" message="tns:IService_victory_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="loss">
+      <wsdl:output wsaw:Action="Server/IService/loss" message="tns:IService_loss_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="receiveMessage">
+      <wsdl:output wsaw:Action="Server/IService/receiveMessage" message="tns:IService_receiveMessage_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>
