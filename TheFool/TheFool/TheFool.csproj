@@ -57,20 +57,21 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Statistics.cs" />
     <Compile Include="Table.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -89,6 +90,117 @@
       <Project>{70fc3ff1-47ca-4591-a3fa-f86e8112bb70}</Project>
       <Name>GameContract</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playing-card-60x90-mm-back-side-16935396.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6_of_clubs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6_of_diamonds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6_of_hearts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6_of_spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7_of_clubs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7_of_diamonds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7_of_hearts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7_of_spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8_of_clubs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8_of_diamonds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8_of_hearts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8_of_spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9_of_clubs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9_of_diamonds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9_of_hearts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\9_of_spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10_of_clubs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10_of_diamonds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10_of_hearts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10_of_spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ace_of_clubs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ace_of_diamonds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ace_of_hearts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ace_of_spades2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jack_of_clubs2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jack_of_diamonds2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jack_of_hearts2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jack_of_spades2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\king_of_clubs2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\king_of_diamonds2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\king_of_hearts2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\king_of_spades2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\queen_of_clubs2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\queen_of_diamonds2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\queen_of_hearts2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\queen_of_spades2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

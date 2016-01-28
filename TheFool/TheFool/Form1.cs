@@ -13,17 +13,32 @@ namespace TheFool
     public partial class Form1 : Form
     {
         public List<PictureBox> pictureBoxList;
+        private List<Card> myCards;
+        private List<Card> playedCards;
         public Form1()
         {
             InitializeComponent();
             this.panelGame.Visible = false;
             this.panelMain.Visible = true;
             this.pictureBoxList = new List<PictureBox>();
+
+            //--------------Generate Cards---------------
+            playedCards = new List<Card>();
+            myCards = new List<Card>();
+            myCards.Add(new Card(CardValues.EIGHT, CardSuit.CLUBS));
+            myCards.Add(new Card(CardValues.NINE, CardSuit.HEARTS));
+            myCards.Add(new Card(CardValues.KING, CardSuit.CLUBS));
+            myCards.Add(new Card(CardValues.SIX, CardSuit.SPADES));
+            myCards.Add(new Card(CardValues.ACE, CardSuit.DIAMONDS));
+            myCards.Add(new Card(CardValues.QUEEN, CardSuit.CLUBS));
+
+            ShowMyCards(myCards);
+            ShowOpCArds(6);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -43,7 +58,7 @@ namespace TheFool
 
         private void pictureBox13_Click(object sender, EventArgs e)
         {
-            this.pictureBoxList.Add(pictureBox13);
+            //this.pictureBoxList.Add(pictureBox13);
             RefreshTable();
         }
 
@@ -107,32 +122,241 @@ namespace TheFool
 
         private void pictureBox12_Click(object sender, EventArgs e)
         {
-            this.pictureBoxList.Add(pictureBox12);
+            //this.pictureBoxList.Add(pictureBox12);
             RefreshTable();
         }
 
         private void pictureBox11_Click(object sender, EventArgs e)
         {
-            this.pictureBoxList.Add(pictureBox11);
+            //this.pictureBoxList.Add(pictureBox11);
             RefreshTable();
         }
 
         private void pictureBox10_Click(object sender, EventArgs e)
         {
-            this.pictureBoxList.Add(pictureBox10);
+            //this.pictureBoxList.Add(pictureBox10);
             RefreshTable();
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
         {
-            this.pictureBoxList.Add(pictureBox4);
+            //this.pictureBoxList.Add(pictureBox4);
             RefreshTable();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            this.pictureBoxList.Add(pictureBox2);
+            //this.pictureBoxList.Add(pictureBox2);
             RefreshTable();
+        }
+
+        private void ShowOpCArds(int count)
+        {
+            int x = 150,
+                y = 50;
+            for (int i = 0; i < count; i++)
+            {
+                PictureBox box = new PictureBox();
+                // Match card with the picture
+                box.Image = TheFool.Properties.Resources.back;
+                // set the location
+                box.Location = new Point(x, y);
+                box.Width = 50;
+                box.Height = 70;
+                box.SizeMode = PictureBoxSizeMode.StretchImage;
+                box.Visible = true;
+                // Post picture
+                this.panelGame.Controls.Add(box);
+                // Adjust the location for the next one
+                x += 55;
+            }
+        }
+
+        private void ShowPlayedCards(List<Card> cards)
+        {
+            int x = 150,
+                y = 170;
+            bool attack = true;
+            foreach (Card c in cards)
+            {
+                PictureBox box = new PictureBox();
+                // Match card with the picture
+                box.Image = MapCard(c.GetSuit(), c.GetValue());
+                // set the location
+                box.Location = new Point(x, y);
+                box.Width = 50;
+                box.Height = 70;
+                box.SizeMode = PictureBoxSizeMode.StretchImage;
+                box.Visible = true;
+                // Adjust the location for the next one
+                if (attack)
+                {
+                    x += 10;
+                    y += 10;
+                }
+                else
+                {
+                    x += 55;
+                    y -= 10;
+                    box.Name = "def";
+                }
+                // Post picture
+                this.panelGame.Controls.Add(box);
+                attack = !attack;
+            }
+        }
+
+        private void ShowMyCards(List<Card> cards)
+        {
+            int x = 150,
+                y = 286;
+            int count = 0;
+            foreach (Card c in cards)
+            {
+                PictureBox box = new PictureBox();
+                // Match card with the picture
+                box.Image = MapCard(c.GetSuit(), c.GetValue());
+                // set the location
+                box.Location = new Point(x, y);
+                box.Width = 50;
+                box.Height = 70;
+                box.SizeMode = PictureBoxSizeMode.StretchImage;
+                box.Visible = true;
+                box.Click += box_Click;
+                box.Name = count.ToString();    // This will let you know which card was pressed
+                // Post picture
+                this.panelGame.Controls.Add(box);
+                // Adjust the location for the next one
+                x += 55;
+
+            }
+            
+        }
+
+        /// <summary>
+        /// Called whenever generated picture box is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void box_Click(object sender, EventArgs e)
+        {
+            int index = Convert.ToInt32(((PictureBox)sender).Name);
+            playedCards.Add(myCards[index]);
+            myCards.RemoveAt(index);
+            Reload();
+        }
+
+        private void Reload()
+        {
+            for (int ix = this.panelGame.Controls.Count - 1; ix >= 0; ix--)
+                if (this.panelGame.Controls[ix] is PictureBox) 
+                    this.panelGame.Controls[ix].Dispose();
+            ShowMyCards(myCards);
+            ShowPlayedCards(playedCards);
+            ShowOpCArds(6);
+            // bring "defence" cards to front
+            for (int ix = this.panelGame.Controls.Count - 1; ix >= 0; ix--)
+                if (this.panelGame.Controls[ix] is PictureBox)
+                    if (((PictureBox)this.panelGame.Controls[ix]).Name == "def")
+                        this.panelGame.Controls[ix].BringToFront();
+        }
+
+        private Image MapCard(CardSuit suit, CardValues value)
+        {
+            if (suit == CardSuit.CLUBS)
+            {
+                if (value == CardValues.SIX)
+                    return TheFool.Properties.Resources._6_of_clubs;
+                if (value == CardValues.SEVEN)
+                    return TheFool.Properties.Resources._7_of_clubs;
+                if (value == CardValues.EIGHT)
+                    return TheFool.Properties.Resources._8_of_clubs;
+                if (value == CardValues.NINE)
+                    return TheFool.Properties.Resources._9_of_clubs;
+                if (value == CardValues.TEN)
+                    return TheFool.Properties.Resources._10_of_clubs;
+                if (value == CardValues.JACK)
+                    return TheFool.Properties.Resources.jack_of_clubs2;
+                if (value == CardValues.QUEEN)
+                    return TheFool.Properties.Resources.queen_of_clubs2;
+                if (value == CardValues.KING)
+                    return TheFool.Properties.Resources.king_of_clubs2;
+                if (value == CardValues.ACE)
+                    return TheFool.Properties.Resources.ace_of_clubs;
+                // Default
+                return TheFool.Properties.Resources.back;
+            }
+            else if (suit == CardSuit.DIAMONDS)
+            {
+                if (value == CardValues.SIX)
+                    return TheFool.Properties.Resources._6_of_diamonds;
+                if (value == CardValues.SEVEN)
+                    return TheFool.Properties.Resources._7_of_diamonds;
+                if (value == CardValues.EIGHT)
+                    return TheFool.Properties.Resources._8_of_diamonds;
+                if (value == CardValues.NINE)
+                    return TheFool.Properties.Resources._9_of_diamonds;
+                if (value == CardValues.TEN)
+                    return TheFool.Properties.Resources._10_of_diamonds;
+                if (value == CardValues.JACK)
+                    return TheFool.Properties.Resources.jack_of_diamonds2;
+                if (value == CardValues.QUEEN)
+                    return TheFool.Properties.Resources.queen_of_diamonds2;
+                if (value == CardValues.KING)
+                    return TheFool.Properties.Resources.king_of_diamonds2;
+                if (value == CardValues.ACE)
+                    return TheFool.Properties.Resources.ace_of_diamonds;
+                // Default
+                return TheFool.Properties.Resources.back;
+            }
+            else if (suit == CardSuit.HEARTS)
+            {
+                if (value == CardValues.SIX)
+                    return TheFool.Properties.Resources._6_of_hearts;
+                if (value == CardValues.SEVEN)
+                    return TheFool.Properties.Resources._7_of_hearts;
+                if (value == CardValues.EIGHT)
+                    return TheFool.Properties.Resources._8_of_hearts;
+                if (value == CardValues.NINE)
+                    return TheFool.Properties.Resources._9_of_hearts;
+                if (value == CardValues.TEN)
+                    return TheFool.Properties.Resources._10_of_hearts;
+                if (value == CardValues.JACK)
+                    return TheFool.Properties.Resources.jack_of_hearts2;
+                if (value == CardValues.QUEEN)
+                    return TheFool.Properties.Resources.queen_of_hearts2;
+                if (value == CardValues.KING)
+                    return TheFool.Properties.Resources.king_of_hearts2;
+                if (value == CardValues.ACE)
+                    return TheFool.Properties.Resources.ace_of_hearts;
+                // Default
+                return TheFool.Properties.Resources.back;
+            }
+            else if (suit == CardSuit.SPADES)
+            {
+                if (value == CardValues.SIX)
+                    return TheFool.Properties.Resources._6_of_spades;
+                if (value == CardValues.SEVEN)
+                    return TheFool.Properties.Resources._7_of_spades;
+                if (value == CardValues.EIGHT)
+                    return TheFool.Properties.Resources._8_of_spades;
+                if (value == CardValues.NINE)
+                    return TheFool.Properties.Resources._9_of_spades;
+                if (value == CardValues.TEN)
+                    return TheFool.Properties.Resources._10_of_spades;
+                if (value == CardValues.JACK)
+                    return TheFool.Properties.Resources.jack_of_spades2;
+                if (value == CardValues.QUEEN)
+                    return TheFool.Properties.Resources.queen_of_spades2;
+                if (value == CardValues.KING)
+                    return TheFool.Properties.Resources.king_of_spades2;
+                if (value == CardValues.ACE)
+                    return TheFool.Properties.Resources.ace_of_spades2;
+                // Default
+                return TheFool.Properties.Resources.back;
+            }
+            else
+                return TheFool.Properties.Resources.back;
         }
     }
 }
